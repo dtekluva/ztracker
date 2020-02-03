@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = [   '192.168.43.118',
                     '192.168.43.96',
                     'localhost',
-                    'resolute40.pythonanywhere.com']
+                    'ztracker.pythonanywhere.com']
 
 
 # Application definition
