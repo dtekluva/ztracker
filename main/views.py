@@ -91,6 +91,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         # print('carrying out test')
         try:
             reqPOST = (json.loads(request.body))
+            print(reqPOST)
             cleaned_json_post = dict(reqPOST['resource'][0])
         except:
             reqPOST = json.loads(ast.literal_eval(str(request.body).replace('\\', '')))
