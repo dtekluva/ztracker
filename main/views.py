@@ -101,7 +101,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
             reqPOST = json.loads(ast.literal_eval(str(request.body).replace('\\', '')))
             cleaned_json_post = dict(reqPOST['resource'][0])
 
-        except KeyError:
+        except:
 
             cleaned_json_post = reqPOST
 
