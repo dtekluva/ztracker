@@ -121,7 +121,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         #Temporary fix remove later for using MR Joseph's account as device post account
         # clean_address = helpers.get_address(lat,lng)
         print(devid)
-        temporary_target = Herdsman.objects.get(userid = devid) # Farmland.objects.get(phone = "08035058587")
+        temporary_target = Herdsman.objects.get(userid = int(devid)) # Farmland.objects.get(phone = "08035058587")
         temporary_target.lng =lng
         temporary_target.lat =lat
         temporary_target.is_panicking = True
