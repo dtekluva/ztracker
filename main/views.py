@@ -89,6 +89,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
 
     if request.method == 'POST':
         # print('carrying out test')
+        print(request.body)
         reqPOST = (json.loads(request.body))
         print(reqPOST)
 
