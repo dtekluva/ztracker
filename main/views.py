@@ -119,7 +119,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         pint = cleaned_json_post.get("pInt", 0)
 
         #Temporary fix remove later for using MR Joseph's account as device post account
-        clean_address = helpers.get_address(lat,lng)
+        # clean_address = helpers.get_address(lat,lng)
         temporary_target = Herdsman.objects.get(userid = devid) # Farmland.objects.get(phone = "08035058587")
         temporary_target.lng =lng
         temporary_target.lat =lat
@@ -131,7 +131,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         new_incident.save()
 
         if lat != '0' and lng != '0' :
-            clean_address = helpers.get_address(lat,lng)
+            # clean_address = helpers.get_address(lat,lng)
             address = clean_address['address']
             state = clean_address['state']
             try:
@@ -140,8 +140,8 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
                 herdsman = Herdsman.objects.get(userid = devid)
                 herdsman.lng = lng
                 herdsman.lat = lat
-                herdsman.state = state
-                herdsman.address = address
+                # herdsman.state = state
+                # herdsman.address = address
                 herdsman.save()
                 last_location_post = Location.objects.filter(herdsman = herdsman).order_by('-id')[0]
 
