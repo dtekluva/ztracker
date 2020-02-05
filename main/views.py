@@ -120,14 +120,14 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
 
         #Temporary fix remove later for using MR Joseph's account as device post account
         clean_address = helpers.get_address(lat,lng)
-        temporary_target = Farmland.objects.get(phone = "08035058587")
+        temporary_target = Herdsman.objects.get(userid = devid) # Farmland.objects.get(phone = "08035058587")
         temporary_target.lng =lng
         temporary_target.lat =lat
         temporary_target.is_panicking = True
         temporary_target.save()
 
         #CREATE NEW PANIC INCIDENT
-        new_incident = Incident(user =temporary_target.user, details = "No details", lat = lat, lng = lng, name = temporary_target.full_name, is_farmer = True, location =temporary_target.community)
+        new_incident = Incident(user =temporary_target.user, details = "No details", lat = lat, lng = lng, name = temporary_target.full_name, is_herdsman = True, location =temporary_target.community)
         new_incident.save()
 
         if lat != '0' and lng != '0' :
