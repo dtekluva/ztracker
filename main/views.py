@@ -115,7 +115,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         lat = cleaned_json_post.get("lat", 0)
         lng = cleaned_json_post.get("lon", 0)
         vbat = cleaned_json_post.get("vbat", 0)
-        speed = cleaned_json_post.get("speed", 0)[0:4]
+        speed = cleaned_json_post.get("speed", 0)
         pint = cleaned_json_post.get("pInt", 0)
 
         #Temporary fix remove later for using MR Joseph's account as device post account
