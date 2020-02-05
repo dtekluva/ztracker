@@ -120,7 +120,7 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         pint = cleaned_json_post.get("pInt", 0)
 
         #Temporary fix remove later for using MR Joseph's account as device post account
-        # clean_address = helpers.get_address(lat,lng)
+        clean_address = helpers.get_address(lat,lng)
         print(devid)
         temporary_target = Herdsman.objects.get(userid = int(devid)) # Farmland.objects.get(phone = "08035058587")
         temporary_target.lng =lng
@@ -129,25 +129,25 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
         temporary_target.save()
 
         #CREATE NEW PANIC INCIDENT
-        new_incident = Incident(user =temporary_target.user, details = "No details", lat = lat, lng = lng, name = temporary_target.full_name, is_herdsman = True)
+        new_incident = Incident(user =temporary_target.user, details = "No details", lat = lat, lng = lng, name = f"{temporary_target.name}{temporary_target.surname}", is_herdsman = True)
         new_incident.save()
 
         if lat != '0' and lng != '0' :
-            # clean_address = helpers.get_address(lat,lng)
+            clean_address = helpers.get_address(lat,lng)
             address = clean_address['address']
             state = clean_address['state']
-            try:
+            try :
                 #07036188527
                 #GET CORRESPONDING HERDSMAN OBJECT
                 herdsman = Herdsman.objects.get(userid = devid)
                 herdsman.lng = lng
                 herdsman.lat = lat
-                # herdsman.state = state
-                # herdsman.address = address
+                herdsman.state = state
+                herdsman.address = address
                 herdsman.save()
                 last_location_post = Location.objects.filter(herdsman = herdsman).order_by('-id')[0]
 
-            except:
+            except :
                 return HttpResponse(json.dumps('No user with id {} found in data base please confirm'.format(devid)))#GET LAST LOCATION FOR TIME COMPARISM
 
 
