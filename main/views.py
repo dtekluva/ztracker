@@ -89,23 +89,33 @@ def locationpost(request): #POST FROM MINI DEVICES DIFFERENT FROM MOBILEE PHONE 
 
     if request.method == 'POST':
         # print('carrying out test')
+        reqPOST = (json.loads(request.body))
+        print(reqPOST)
+
         try:
-            reqPOST = (json.loads(request.body))
-            print(reqPOST)
+
             cleaned_json_post = dict(reqPOST['resource'][0])
+
         except:
+
             reqPOST = json.loads(ast.literal_eval(str(request.body).replace('\\', '')))
             cleaned_json_post = dict(reqPOST['resource'][0])
 
-        devid = cleaned_json_post["devid"]
-        time  = cleaned_json_post["time"]
-        etype = cleaned_json_post["etype"]
-        engine = cleaned_json_post["engine"]
-        lat = cleaned_json_post["lat"]
-        lng = cleaned_json_post["lon"]
-        vbat = cleaned_json_post["vbat"]
-        speed = cleaned_json_post["speed"][0:4]
-        pint = cleaned_json_post["pInt"]
+        except KeyError:
+
+            cleaned_json_post = reqPOST
+
+
+
+        devid = cleaned_json_post.get("devid", 0)
+        time  = cleaned_json_post.get("time", 0)
+        etype = cleaned_json_post.get("etype", 0)
+        engine = cleaned_json_post.get("engine", 0)
+        lat = cleaned_json_post.get("lat", 0)
+        lng = cleaned_json_post.get("lon", 0)
+        vbat = cleaned_json_post.get("vbat", 0)
+        speed = cleaned_json_post.get("speed", 0)[0:4]
+        pint = cleaned_json_post.get("pInt", 0)
 
         #Temporary fix remove later for using MR Joseph's account as device post account
         clean_address = helpers.get_address(lat,lng)
